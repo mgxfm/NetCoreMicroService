@@ -84,9 +84,14 @@ namespace mvcCookieAuthSample.Controllers
         #endregion
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string returnUrl)
         {
-            return View();
+            var model = await BuildConsentViewModel(returnUrl);
+            if(model == null)
+            {
+                //todo 异常处理
+            }
+            return View(model);
         }
     }
 }
